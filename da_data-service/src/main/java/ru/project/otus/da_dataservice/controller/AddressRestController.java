@@ -7,12 +7,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import ru.project.otus.da_dataservice.model.Suggestion;
 import ru.project.otus.da_dataservice.model.response_model.Data;
 import ru.project.otus.da_dataservice.service.address.AddressService;
 
+@Slf4j
 @Tag(name = "Address Controller", description = "Контроллер для получения информации по городу его идентификатора " +
         "в службе доставки и почтовых отделений")
 @RestController
@@ -45,7 +47,10 @@ public class AddressRestController {
             @ApiResponse(responseCode = "5xx", description = "Произошла внутренняя ошибка сервиса", content = @Content)})
     @GetMapping("/addressBySource")
     public final Mono<Data[]> findBySource(@RequestParam("search") String search) {
-        return addressService.findBySource(search);
+        log.info("findBySource request :: {}", search);
+        var result = addressService.findBySource(search);
+        log.info("findBySource response :: {}", result);
+        return result;
     }
 
     /**
@@ -72,7 +77,10 @@ public class AddressRestController {
             @ApiResponse(responseCode = "5xx", description = "Произошла внутренняя ошибка сервиса", content = @Content)})
     @PostMapping("/addressByGeo")
     public final Mono<Suggestion> findByGeo(@RequestBody String body) {
-            return addressService.findByGeo(body);
+        log.info("findByGeo request :: {}", body);
+        var result = addressService.findByGeo(body);
+        log.info("findByGeo response :: {}", result);
+        return result;
     }
 
     /**
@@ -99,7 +107,10 @@ public class AddressRestController {
             @ApiResponse(responseCode = "5xx", description = "Произошла внутренняя ошибка сервиса", content = @Content)})
     @PostMapping("/findById/delivery")
     public Mono<Suggestion> findDelivery(@RequestBody String body) {
-        return addressService.findDeliveryId(body);
+        log.info("findDelivery request :: {}", body);
+        var result = addressService.findDeliveryId(body);
+        log.info("findDelivery response :: {}", result);
+        return result;
     }
 
     /**
@@ -127,6 +138,9 @@ public class AddressRestController {
             @ApiResponse(responseCode = "5xx", description = "Произошла внутренняя ошибка сервиса", content = @Content)})
     @PostMapping("/findById/postal_unit")
     public Mono<Suggestion> findPostalOffice(@RequestBody String body) {
-        return addressService.findPostalOffice(body);
+        log.info("findPostalOffice request :: {}", body);
+        var result = addressService.findPostalOffice(body);
+        log.info("findPostalOffice response :: {}", result);
+        return result;
     }
 }

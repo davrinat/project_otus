@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import reactor.core.publisher.Mono;
 import ru.project.otus.da_dataservice.model.Suggestion;
 import ru.project.otus.da_dataservice.service.company.CompanyService;
 
+@Slf4j
 @Tag(name = "Company Controller", description = "Контроллер для получения информации о компаниях по ИНН или ОГРН, " +
         "а так же по адресу электронной почты")
 @RestController
@@ -48,7 +50,10 @@ public class CompanyRestController {
             @ApiResponse(responseCode = "5xx", description = "Произошла внутренняя ошибка сервиса", content = @Content)})
     @PostMapping("/findById/party")
     public Mono<Suggestion> findByInn(@RequestBody String body) {
-        return companyService.findByInn(body);
+        log.info("findByInn request :: {}", body);
+        var result = companyService.findByInn(body);
+        log.info("findByInn response :: {}", result);
+        return result;
     }
 
     /**
@@ -76,7 +81,10 @@ public class CompanyRestController {
             @ApiResponse(responseCode = "5xx", description = "Произошла внутренняя ошибка сервиса", content = @Content)})
     @PostMapping("/findAffiliated/party")
     public Mono<Suggestion> findAffiliated(@RequestBody String body) {
-        return companyService.findAffiliated(body);
+        log.info("findAffiliated request :: {}", body);
+        var result = companyService.findAffiliated(body);
+        log.info("findAffiliated response :: {}", result);
+        return result;
     }
 
     /**
@@ -104,6 +112,9 @@ public class CompanyRestController {
             @ApiResponse(responseCode = "5xx", description = "Произошла внутренняя ошибка сервиса", content = @Content)})
     @PostMapping("/findByEmail/company")
     public Mono<Suggestion> findByEmail(@RequestBody String body) {
-        return companyService.findByEmail(body);
+        log.info("findByEmail request :: {}", body);
+        var result = companyService.findByEmail(body);
+        log.info("findByEmail response :: {}", result);
+        return result;
     }
 }

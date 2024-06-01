@@ -17,29 +17,29 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Mono<Data[]> findBySource(String search) {
-        String baseURL = BaseURL.CLEANER_DADATA.getBase();
-        String path = PathConstant.GEO_BY_ADDRESS.getPath();
+        var baseURL = BaseURL.CLEANER_DADATA.getBase();
+        var path = PathConstant.GEO_BY_ADDRESS.getPath();
         return remoteService.connect(baseURL, path, Utils.toArray(search)).bodyToMono(Data[].class);
     }
 
     @Override
     public Mono<Suggestion> findByGeo(String body) {
-        String baseURL = BaseURL.SUGGESTION_DADATA.getBase();
-        String path = PathConstant.ADDRESS_BY_GEO.getPath();
+        var baseURL = BaseURL.SUGGESTION_DADATA.getBase();
+        var path = PathConstant.ADDRESS_BY_GEO.getPath();
         return remoteService.connect(baseURL, path, body).bodyToMono(Suggestion.class);
     }
 
     @Override
     public Mono<Suggestion> findDeliveryId(String body) {
-        String baseURL = BaseURL.SUGGESTION_DADATA.getBase();
-        String path = PathConstant.DELIVERY.getPath();
+        var baseURL = BaseURL.SUGGESTION_DADATA.getBase();
+        var path = PathConstant.DELIVERY.getPath();
         return remoteService.connect(baseURL, path, body).bodyToMono(Suggestion.class);
     }
 
     @Override
     public Mono<Suggestion> findPostalOffice(String body) {
-        String baseURL = BaseURL.SUGGESTION_DADATA.getBase();
-        String path = PathConstant.POSTAL_UNIT.getPath();
+        var baseURL = BaseURL.SUGGESTION_DADATA.getBase();
+        var path = PathConstant.POSTAL_UNIT.getPath();
         return remoteService.connect(baseURL, path, body).bodyToMono(Suggestion.class);
     }
 }

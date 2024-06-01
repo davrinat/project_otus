@@ -7,11 +7,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import ru.project.otus.da_dataservice.model.Suggestion;
 import ru.project.otus.da_dataservice.service.common.CommonService;
 
+@Slf4j
 @Tag(name = "Common Controller", description = "Общий контроллер для получения информации о банке, таможенных постах и " +
         "налоговых инспекциях, а так же содержит справочники по товарам и валютам")
 @RestController
@@ -49,7 +51,10 @@ public class CommonRestController {
             @ApiResponse(responseCode = "5xx", description = "Произошла внутренняя ошибка сервиса", content = @Content)})
     @PostMapping("/findById/bank")
     public Mono<Suggestion> findBank(@RequestBody String body) {
-        return commonService.findBank(body);
+        log.info("findBank request :: {}", body);
+        var result = commonService.findBank(body);
+        log.info("findBank response :: {}", result);
+        return result;
     }
 
     /**
@@ -76,7 +81,10 @@ public class CommonRestController {
             @ApiResponse(responseCode = "5xx", description = "Произошла внутренняя ошибка сервиса", content = @Content)})
     @PostMapping("/findById/fns_unit")
     public Mono<Suggestion> findFnsUnit(@RequestBody String body) {
-        return commonService.findFnsUnit(body);
+        log.info("findFnsUnit request :: {}", body);
+        var result = commonService.findFnsUnit(body);
+        log.info("findFnsUnit response :: {}", result);
+        return result;
     }
 
     /**
@@ -103,7 +111,10 @@ public class CommonRestController {
             @ApiResponse(responseCode = "5xx", description = "Произошла внутренняя ошибка сервиса", content = @Content)})
     @PostMapping("/findById/fts_unit")
     public Mono<Suggestion> findFtsUnit(@RequestBody String body) {
-        return commonService.findFtsUnit(body);
+        log.info("findFtsUnit request :: {}", body);
+        var result = commonService.findFtsUnit(body);
+        log.info("findFtsUnit response :: {}", result);
+        return result;
     }
 
     /**
@@ -130,7 +141,10 @@ public class CommonRestController {
             @ApiResponse(responseCode = "5xx", description = "Произошла внутренняя ошибка сервиса", content = @Content)})
     @GetMapping("/findBySource/goods")
     public Mono<Suggestion> findGoodsBySource(@RequestParam("search") String search) {
-        return commonService.findGoodsBySource(search);
+        log.info("findGoodsBySource request :: {}", search);
+        var result = commonService.findGoodsBySource(search);
+        log.info("findGoodsBySource response :: {}", result);
+        return result;
     }
 
     /**
@@ -157,6 +171,9 @@ public class CommonRestController {
             @ApiResponse(responseCode = "5xx", description = "Произошла внутренняя ошибка сервиса", content = @Content)})
     @GetMapping("/findBySource/currency")
     public Mono<Suggestion> findCurrency(@RequestParam("search") String search) {
-        return commonService.findCurrency(search);
+        log.info("findCurrency request :: {}", search);
+        var result = commonService.findCurrency(search);
+        log.info("findCurrency response :: {}", result);
+        return result;
     }
 }

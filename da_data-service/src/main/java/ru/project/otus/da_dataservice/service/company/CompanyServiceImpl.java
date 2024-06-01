@@ -1,6 +1,7 @@
 package ru.project.otus.da_dataservice.service.company;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import ru.project.otus.da_dataservice.common.constant.BaseURL;
@@ -15,22 +16,22 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Mono<Suggestion> findByInn(String body) {
-        String baseURL = BaseURL.SUGGESTION_DADATA.getBase();
-        String path = PathConstant.BY_INN.getPath();
+        var baseURL = BaseURL.SUGGESTION_DADATA.getBase();
+        var path = PathConstant.BY_INN.getPath();
         return remoteService.connect(baseURL, path, body).bodyToMono(Suggestion.class);
     }
 
     @Override
     public Mono<Suggestion> findAffiliated(String body) {
-        String baseURL = BaseURL.SUGGESTION_DADATA.getBase();
-        String path = PathConstant.AFFILIATED.getPath();
+        var baseURL = BaseURL.SUGGESTION_DADATA.getBase();
+        var path = PathConstant.AFFILIATED.getPath();
         return remoteService.connect(baseURL, path, body).bodyToMono(Suggestion.class);
     }
 
     @Override
     public Mono<Suggestion> findByEmail(String body) {
-        String baseURL = BaseURL.SUGGESTION_DADATA.getBase();
-        String path = PathConstant.BY_EMAIL.getPath();
+        var baseURL = BaseURL.SUGGESTION_DADATA.getBase();
+        var path = PathConstant.BY_EMAIL.getPath();
         return remoteService.connect(baseURL, path, body).bodyToMono(Suggestion.class);
     }
 }
