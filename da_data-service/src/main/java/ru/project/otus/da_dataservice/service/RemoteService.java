@@ -13,9 +13,9 @@ import ru.project.otus.da_dataservice.exception.IncorrectRequestException;
 @RequiredArgsConstructor
 public class RemoteService {
     @Value("${da_data.source.apikey}")
-    String apiKey;
+    private final String apiKey;
     @Value("${da_data.source.secret}")
-    String xSecret;
+    private final String xSecret;
     private final WebClient.Builder webclientBuilder;
 
     public WebClient.ResponseSpec connect(String base, String path, String request) {
