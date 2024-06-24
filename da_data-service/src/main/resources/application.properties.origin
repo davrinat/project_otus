@@ -1,0 +1,7 @@
+spring.application.name=dadata_service
+
+da_data.source.apikey=API-ключ. Для получения необходимо зарегистрироваться (https://dadata.ru/)
+da_data.source.secret=Секретный ключ. Для получения необходимо зарегистрироваться (https://dadata.ru/)
+
+application-version=0.0.1-SNAPSHOT
+application-description=Сервис актуализации справочной информации через Open API DaData
